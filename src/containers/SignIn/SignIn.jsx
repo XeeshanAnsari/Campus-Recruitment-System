@@ -1,7 +1,11 @@
 import React ,{ Component } from 'react'
 import * as MUI from 'material-ui'
-
+import {browserHistory} from 'react-router'
+import {connect} from 'react-redux'
+import FirebaseService from './../../firebase/firebaseService'
+import signIn from './../../store/actions'
 import './SignIn.css'
+
 
 
 class SignIn extends Component{
@@ -16,6 +20,18 @@ class SignIn extends Component{
      
   }
  
+
+ handleSignIn(e){
+     e.preventDefault();
+
+     FirebaseService.LoginWithAuth(this.state)
+     .then((user) => {
+         console.log(user)
+         this.props.signIn(this.state)
+         browserHistory.push('/home')
+     })
+
+ }
  
   
     
@@ -62,4 +78,16 @@ class SignIn extends Component{
     }
 }
 
-export default SignIn
+function mapStateToProps(state){
+    return {
+        authReducer : state
+    }
+}
+
+function mapDispatchToProps(dispatch){
+    return{
+        signin: (data) => dispatch(signIn(data))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

@@ -2,7 +2,7 @@
 
 const InitalState = {
     isRegistered: false,
-    isLoged: false,
+    isLogged: false,
     user:{}
 
 };
@@ -11,9 +11,12 @@ const InitalState = {
 function AuthReducer(state = InitalState , action){
     switch(action.type){
         case "SIGN_UP":
-           return Object.assign({}, state ,{ user:action.value ,isRegistered: true})
+           return (state ,{ user:action.value ,isRegistered: true})
         case "SIGN_IN":
-           return Object.assign({}, state ,{ user:action.user ,isLoged: true})
+           return (state ,{ user:action.user , isLogged: true}) 
+        case "LOG_OUT":
+           return (state , {  isLogged: false}) 
+          
         default:
            return state
     }

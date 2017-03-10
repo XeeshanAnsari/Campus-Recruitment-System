@@ -25,7 +25,7 @@ export default class FirebaseService {
    static LoginWithAuth(user) { // login With Auth
         return this.auth.signInWithEmailAndPassword(user.email, user.pass);
     }
-   static addNewUser(Path , user ) {
+   static saveData(Path , user ) {
         return this.ref.child(Path).push(user);
     } 
 }

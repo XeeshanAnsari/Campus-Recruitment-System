@@ -1,0 +1,14 @@
+.container{
+    width: 60%;
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    margin: 0px auto
+}
+.paper{
+    padding: 5% 10%;
+}
+.submit-btn{
+   margin-top: 5%;
+   
+}

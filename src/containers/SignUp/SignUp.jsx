@@ -12,6 +12,7 @@ export class SignUp extends Component{
       super(props)
       this.state={
           userType:"",
+          user:"",
           value: 1
       }
       this.handleSignUp = this.handleSignUp.bind(this)
@@ -25,14 +26,14 @@ export class SignUp extends Component{
            lastName: this.refs.lastName.getValue(),
            email: this.refs.email.getValue(),
            pass: this.refs.pass.getValue(),
+           userType:this.state.userType
       }
 
       FirebaseService.SignUpWithAuth(newUser)
       .then((user) => {
          
-          (this.state.value === 1) ? 
-          FirebaseService.addNewUser( `Users/Company/${user.uid}`, newUser) :
-          FirebaseService.addNewUser( `Users/Students/${user.uid}` , newUser )
+          
+          FirebaseService.saveData( `Users`, newUser) 
           this.props.signup(newUser)
 
           browserHistory.push('/signin') 
@@ -46,12 +47,17 @@ export class SignUp extends Component{
 
   // for userType 
   handleUserType(e,key){
-       let userType =   key+1;
+       let value =   key+1;
+       let userType;
+       if(value === 1 ) userType="Company" 
+       else userType="Student"
        this.setState({
-           userType: userType
+           user: value,
+           userType:userType
+           
        })
       
-      console.log(userType)
+      console.log(value,userType)
 
   }
  
@@ -65,7 +71,8 @@ export class SignUp extends Component{
                         <form onSubmit={this.handleSignUp}>
                             <MUI.TextField  
                                 ref="firstName"
-                                floatingLabelText="First Name" 
+                                floatingLabelText="First Name"
+                                 
                                 hintText="First Name"
                                 fullWidth={true}
                                 required
@@ -96,7 +103,7 @@ export class SignUp extends Component{
                              <MUI.SelectField 
                              ref="userType"
                              floatingLabelText="User Type"
-                             value={this.state.userType}
+                             value={this.state.user}
                              fullWidth 
                              onChange={this.handleUserType.bind(this)} >
 

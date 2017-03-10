@@ -5,6 +5,7 @@ import Buttons from './containers/Buttons/Buttons'
 import AppBar from './containers/AppBar/AppBar'
 import SignUp from './containers/SignUp/SignUp'
 import SignIn from './containers/SignIn/SignIn'
+import  StudentRegister    from './components/StudentRegister/StudenRegister'
 import injectTapEventPlugin from 'react-tap-event-plugin'; //react-tap-event-plugin provides onTouchTap() to all React Components.
 injectTapEventPlugin();
 
@@ -18,6 +19,7 @@ class App extends Component{
                       
                        <Route path="/signup" component={SignUp} />
                        <Route path="/signin" component={SignIn} />
+                       <Route path="/registration" component={StudentRegister} />
                     </Route>
                 </Router>
             </div>

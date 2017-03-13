@@ -15,9 +15,11 @@ class StudentRegister extends Component{
 
     }
     handleRegister(e){
-        
+        // (this.porps.user.uerType === "Student") ? browserHistory.push('/home') : null
          e.preventDefault();
         const studentDetails = {
+            email: this.props.user.email,
+            gender:this.props.user.gender,
             lastEdu: this.refs.lastEdu.getValue(),
             eduYear: this.refs.eduYear.getValue(),
             eduGrade: this.refs.eduGrade.getValue(),
@@ -28,7 +30,8 @@ class StudentRegister extends Component{
         }
         // this.props.StudentRegister(studentDetails) when of line
         // console.log(studentDetails)
-        let uid = this.props.uid
+        let uid = this.props.user.uid
+        
         FirebaseService.saveData('studentsDetail/' + uid , studentDetails)
         .then(() => {
          console.log(studentDetails)
@@ -101,7 +104,7 @@ class StudentRegister extends Component{
 
 function mapStateToProps(state){
     return {
-        uid : state.AuthReducer.user.uid
+        user : state.DataReducer.userInfo
     }
 }
 

@@ -48,14 +48,22 @@ import './Buttons.css'
                       </div>
                       :
                      <div>
-                         {/*{(this.props.userStatus === "Company") ?*/}
+                        
                          <MUI.DropDownMenu   >
-                                <Link to='/registration'><MUI.MenuItem primaryText="Register" /></Link>
-                                <Link to='/viewStudentDetail'><MUI.MenuItem  primaryText="View My Details" /></Link>
-                                <Link to='/jobPost'><MUI.MenuItem  primaryText="Post a job" /></Link>
-                                <Link to='/viewJob'><MUI.MenuItem  primaryText="View Job" /></Link>
+                              {(this.props.userType === "Student") ?
+                                <div>
+                                    <Link to='/registration'><MUI.MenuItem primaryText="Register Resume" /></Link>
+                                    <Link to='/viewStudentDetail'><MUI.MenuItem  primaryText="View My Resume" /></Link>
+                                </div>
+                             :null}
+                             {(this.props.userType === "Company") ?
+                                <div>                         
+                                    <Link to='/jobPost'><MUI.MenuItem  primaryText="Post job" /></Link>
+                                    <Link to='/viewJob'><MUI.MenuItem  primaryText="View Job" /></Link>
+                                </div>
+                               :null }
                         </MUI.DropDownMenu>
-                        {/*:null}*/}
+                        
                          <MUI.RaisedButton
                         onClick={this.handleLogOut}
                         className='buttons'
@@ -75,7 +83,7 @@ import './Buttons.css'
 function mapStateToProps(state){
     return {
         isLogged: state.AuthReducer.isLogged,
-        // userStatus: state.AuthReducer.
+        userType: state.DataReducer.userInfo.userType
     }
 }
 

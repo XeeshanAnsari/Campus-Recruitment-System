@@ -1,6 +1,6 @@
 import React ,{Component} from 'react'
 import {connect} from 'react-redux'
-import {viewStudentDetails}  from './../../store/actions'
+import {viewStudentDetails, viewJobPost}  from './../../store/actions'
 import * as firebase from 'firebase'
 import  {browserHistory}  from 'react-router'
 import {currentUserInfo} from './../../store/actions/authAction'
@@ -10,20 +10,25 @@ class Home extends Component{
     
     
    componentWillMount(){
-  console.log()
+ 
        let uid = this.props.user.uid
-      
+      // for studentsDetail Get form firebase
        firebase.database().ref('studentsDetail/'+ uid).on('value', (snapshot) =>{
             const studentDetails = snapshot.val()  
             console.log(studentDetails)
             this.props.viewDetails(studentDetails)
-         })
-        // firebase.database().ref('jobs/').on('child_added', (snapshot) =>{
-        //     const jobs = snapshot.val()  
-        //     console.log(jobs)
-        //     this.props.viewJobPost(jobs)
-        //  })
+        
+        })
+           // for job Get form firebase
+       firebase.database().ref('jobs/'+ uid).on('value', (snapshot) =>{
+            const job = snapshot.val()  
+            console.log(job)
+            this.props.viewJobPost(job)
+        
+        })
+        
    }
+  
   
 
     
@@ -47,7 +52,8 @@ class Home extends Component{
 
   function mapDispatchToProps(dispatch){
     return{
-          viewDetails: (data) => dispatch(viewStudentDetails(data))
+          viewDetails: (data) => dispatch(viewStudentDetails(data)),
+          viewJobPost: (data) => dispatch(viewJobPost(data))
         }
     }
 

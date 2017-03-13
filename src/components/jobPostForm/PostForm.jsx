@@ -17,20 +17,22 @@ class PostForm extends Component{
     handlePost(e){
         e.preventDefault();
         const job = {
-            jobTitle: this.refs.jobTitle.getValue(),
-            skillsRequired: this.refs.skillsRequired.getValue(),
-            expRequired: this.refs.expRequired.getValue(),
+            uid:this.props.user.uid,
+            companyName:this.props.user.companyName,
+            title: this.refs.jobTitle.getValue(),
+            skills: this.refs.skillsRequired.getValue(),
+            experience: this.refs.expRequired.getValue(),
             salary: this.refs.expRequired.getValue(),
-            jobDescription: this.refs.jobDescription.getValue(),
+            description: this.refs.jobDescription.getValue(),
         }
 
         let uid  = this.props.user.uid;
         
-        
+          
         FirebaseService.saveData('/jobs/' + uid , job)
-        .then((jobDetails)=>{
-            console.log(jobDetails);
-            this.props.jobPost(jobDetails);
+        .then(() => {
+            console.log(job);
+            this.props.jobPost(job);
 
        }).catch(e => console.log(e.message))
         
@@ -94,7 +96,7 @@ class PostForm extends Component{
 
 function mapStateToProps(state){
     return {
-        user: state.AuthReducer.user
+        user: state.DataReducer.userInfo
        
     }
 }

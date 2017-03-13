@@ -5,14 +5,10 @@ import {viewJobPost}  from './../../store/actions'
 import * as firebase from 'firebase'
 import  {browserHistory}  from 'react-router'
 import FirebaseService from './../../firebase/firebaseService'
-import './viewDetails.css'
+import './viewJob.css'
 
 class ViewJob extends Component{
-    
-    constructor(){
-        super()
-        
- }
+   
 
   
 
@@ -29,10 +25,7 @@ class ViewJob extends Component{
     //     })
     //     // browserHistory.push('/signin');
        
-       
-
-       
-    // }
+       // }
     
    
     
@@ -44,11 +37,12 @@ class ViewJob extends Component{
                         <MUI.Paper className="paper">
                           <h1>Details</h1>
                           <div className="detail">
-                              <div><b>Compnay Name :</b> { }</div>
-                              <div><b>Job Title : </b> {} </div>
-                              <div><b>Skills requied : </b> {} </div>
-                              <div><b>Experience requied : </b> {}</div>
-                              <div><b>Job Descripation : </b> {}</div>
+                              <div><b>Compnay Name :</b> {this.props.job.companyName }</div>
+                              <div><b>Job Title : </b> {this.props.job.title } </div>
+                              <div><b>Skills requied : </b> {this.props.job.skills} </div>
+                              <div><b>Skills requied : </b> {this.props.job.salary} </div>
+                              <div><b>Experience requied : </b> {this.props.job.experience}</div>
+                              <div><b>Job Descripation : </b> {this.props.job.description}</div>
                               
                              
                           </div>
@@ -62,8 +56,6 @@ class ViewJob extends Component{
 
  function mapStateToProps(state){
     return {
-        currentUser: state.AuthReducer.isLogged,
-        user : state.AuthReducer.user,
         job: state.CompanyReducer.jobDetails
             
         }
@@ -71,7 +63,7 @@ class ViewJob extends Component{
 
   function mapDispatchToProps(dispatch){
     return{
-        viewJobPost: (data) => dispatch(viewJobPost(data))
+       
         }
     }
 

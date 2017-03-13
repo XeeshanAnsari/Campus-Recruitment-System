@@ -37,12 +37,15 @@ class ViewStudentDetails extends Component{
     
     render(){
         return(
+            
             <div>
+                
                 <MUI.MuiThemeProvider>
                     <div className="container">
                         <MUI.Paper className="paper">
                           <h1>Details</h1>
                           <div className="detail">
+                              
                               <div><b>Email :</b> { this.props.user.email}</div>
                               <div><b>Gender :</b> { this.props.user.gender}</div>
                               <div><b>Last Education : </b> {this.props.student.lastEdu} </div>

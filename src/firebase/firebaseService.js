@@ -13,6 +13,8 @@ firebase.initializeApp(config);
 
 export default class FirebaseService {
    
+
+
     static ref = firebase.database().ref();
     static auth = firebase.auth();
 
@@ -28,9 +30,12 @@ export default class FirebaseService {
     static LogOut(){// logOut
         return this.auth.signOut();
     }
-   static saveData(Path , user ) {
-        return this.ref.child(Path).push(user);
+   static saveData(Path , data ) {
+        return this.ref.child(Path).set(data);
     } 
+   
+
+    
 }
 
 

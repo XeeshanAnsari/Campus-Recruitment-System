@@ -1,21 +1,19 @@
 
 
+import {signIn ,signUp , LogOut } from './authAction'
+import {currentUserInfo} from './dataAction'
+import {addStudentDetails ,viewStudentDetails} from './studentAction'
+import {newJobPost ,viewJobPost} from './companyAction'
 
-export  function signUp(user) {
-    return {
-        type: 'SIGN_UP',
-        value: user
-    }
-}
+export{
+    signIn,
+    signUp,
+    currentUserInfo,
+    LogOut,
+    addStudentDetails,
+    viewStudentDetails,
+    newJobPost,
+    viewJobPost
 
-export  function signIn(user) {
-    return {
-        type: 'SIGN_IN',
-        user: user
-    }
-}
-export function LogOut(){
-    return{
-        type:'LOG_OUT'
-    }
+
 }

@@ -38,18 +38,32 @@ import './Buttons.css'
                      
                        { (this.props.isLogged === false) 
                        ?  
-                       <div>  
+                       <div>
+                            {/*<MUI.DropDownMenu   >
+                                <Link to='/registration'><MUI.MenuItem primaryText="Register" /></Link>
+                                <Link to='/viewStudentDetail'><MUI.MenuItem  primaryText="View My Details" /></Link>
+                          </MUI.DropDownMenu>  when of line                 */}
                             <Link to="/signin"  className='buttons'><MUI.RaisedButton type="submit" primary={true} >Sign In</MUI.RaisedButton></Link>
                             <Link to="/signup"  className='buttons'><MUI.RaisedButton type="submit" primary={true} >Sign Up</MUI.RaisedButton></Link> 
                       </div>
                       :
-                     <MUI.RaisedButton
+                     <div>
+                         {/*{(this.props.userStatus === "Company") ?*/}
+                         <MUI.DropDownMenu   >
+                                <Link to='/registration'><MUI.MenuItem primaryText="Register" /></Link>
+                                <Link to='/viewStudentDetail'><MUI.MenuItem  primaryText="View My Details" /></Link>
+                                <Link to='/jobPost'><MUI.MenuItem  primaryText="Post a job" /></Link>
+                                <Link to='/viewJob'><MUI.MenuItem  primaryText="View Job" /></Link>
+                        </MUI.DropDownMenu>
+                        {/*:null}*/}
+                         <MUI.RaisedButton
                         onClick={this.handleLogOut}
                         className='buttons'
                         type="submit"
                         primary={true} >
                         Log Out
                         </MUI.RaisedButton>
+                      </div>   
                        }
                    </div>
                 </MUI.MuiThemeProvider>
@@ -60,7 +74,8 @@ import './Buttons.css'
 
 function mapStateToProps(state){
     return {
-        isLogged: state.AuthReducer.isLogged
+        isLogged: state.AuthReducer.isLogged,
+        // userStatus: state.AuthReducer.
     }
 }
 

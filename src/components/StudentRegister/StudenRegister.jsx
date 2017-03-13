@@ -1,6 +1,9 @@
 import React ,{Component} from 'react'
 import * as MUI from 'material-ui'
 import {browserHistory} from 'react-router'
+import {connect} from 'react-redux'
+import AuthReducer from './../../store/reducers/authReducer'
+import {addStudentDetails} from './../../store/actions'
 import FirebaseService from './../../firebase/firebaseService'
 import './studentRegister.css'
 
@@ -14,7 +17,7 @@ class StudentRegister extends Component{
     handleRegister(e){
         
          e.preventDefault();
-        const studentDetail = {
+        const studentDetails = {
             lastEdu: this.refs.lastEdu.getValue(),
             eduYear: this.refs.eduYear.getValue(),
             eduGrade: this.refs.eduGrade.getValue(),
@@ -23,10 +26,16 @@ class StudentRegister extends Component{
             description: this.refs.description.getValue()
 
         }
-
-        FirebaseService.saveData('studentsDetail/' , studentDetail)
-        console.log(studentDetail)
-        // browserHistory.push('/viewDetail')
+        // this.props.StudentRegister(studentDetails) when of line
+        // console.log(studentDetails)
+        let uid = this.props.uid
+        FirebaseService.saveData('studentsDetail/' + uid , studentDetails)
+        .then(() => {
+         console.log(studentDetails)
+         this.props.StudentRegister(studentDetails)
+         browserHistory.push('/home')
+        })
+       
         
     }
     
@@ -34,8 +43,8 @@ class StudentRegister extends Component{
         return(
             <div>
                 <MUI.MuiThemeProvider>
-                    <div className="container">
-                        <MUI.Paper className="paper">
+                    <div className="stu-container">
+                        <MUI.Paper className="stu-paper">
                         <form onSubmit={this.handleRegister}>
                             <MUI.TextField  
                                 hintText="Last Education"
@@ -89,4 +98,17 @@ class StudentRegister extends Component{
     }
 }
 
-export default StudentRegister
+
+function mapStateToProps(state){
+    return {
+        uid : state.AuthReducer.user.uid
+    }
+}
+
+function mapDispatchToProps(dispatch){
+    return{
+        StudentRegister: (data) => dispatch(addStudentDetails(data))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(StudentRegister)

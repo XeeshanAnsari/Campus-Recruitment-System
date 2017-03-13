@@ -1,0 +1,11 @@
+.container{
+    width: 60%;
+    margin: 7% auto;
+}
+.paper{
+    padding: 5% 10%;
+}
+.detail > div{
+    margin: 2%;
+
+}

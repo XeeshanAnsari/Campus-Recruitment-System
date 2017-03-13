@@ -13,10 +13,13 @@ export class SignUp extends Component{
       this.state={
           userType:"",
           user:"",
-          value: 1
+          companyName:"",
+          gender:"",
+          value: 1,
+          key: 1,
+          
       }
       this.handleSignUp = this.handleSignUp.bind(this)
-      
   }
   //handele Signup
   handleSignUp(e){
@@ -26,14 +29,16 @@ export class SignUp extends Component{
            lastName: this.refs.lastName.getValue(),
            email: this.refs.email.getValue(),
            pass: this.refs.pass.getValue(),
-           userType:this.state.userType
+           userType:this.state.userType,
+           companyName: this.state.companyName,
+           gender:this.state.gender,
       }
 
       FirebaseService.SignUpWithAuth(newUser)
       .then((user) => {
-         
           
-          FirebaseService.saveData( `Users`, newUser) 
+          newUser.uid = user.uid
+          FirebaseService.saveData( `Users/${user.uid}`, newUser) 
           this.props.signup(newUser)
 
           browserHistory.push('/signin') 
@@ -43,7 +48,19 @@ export class SignUp extends Component{
 
       console.log(newUser)
   }
-
+  handleGender(e,key){
+       let val = key + 1;
+       let gender;
+       if(val === 1)  gender="Male" 
+       else gender="Female"
+       
+       this.setState({
+           key : val,
+           gender : gender
+           
+       })
+       console.log(val , gender)
+  }
 
   // for userType 
   handleUserType(e,key){
@@ -111,6 +128,32 @@ export class SignUp extends Component{
                                     <MUI.MenuItem value={2} primaryText="Student" />
 
                               </MUI.SelectField>   
+                              
+                              {(this.state.userType === "Company")?
+                               <MUI.TextField  
+                                value={this.state.companyName}
+                                floatingLabelText="Company Name" 
+                                hintText="Company Name"
+                                onChange={e => this.setState({companyName:e.target.value})}
+                                fullWidth={true}
+                                required
+                                />
+                                :null}
+                                
+                                
+                     {(this.state.userType === "Student")?
+                               <MUI.SelectField 
+                                ref="gender"
+                                floatingLabelText="Gender"
+                                value={this.state.key}
+                                fullWidth 
+                                onChange={this.handleGender.bind(this)} >
+
+                                    <MUI.MenuItem value={1} primaryText="Male" />
+                                    <MUI.MenuItem value={2} primaryText="Female" />
+
+                              </MUI.SelectField>  
+                            :null}
 
                         
                         <MUI.RaisedButton 

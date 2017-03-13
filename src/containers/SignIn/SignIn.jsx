@@ -2,8 +2,9 @@ import React ,{ Component } from 'react'
 import * as MUI from 'material-ui'
 import {browserHistory} from 'react-router'
 import {connect} from 'react-redux'
+import * as firebase from 'firebase'
 import FirebaseService from './../../firebase/firebaseService'
-import {signIn} from './../../store/actions'
+import {signIn , currentUserInfo} from './../../store/actions'
 import './SignIn.css'
 
 
@@ -14,6 +15,7 @@ class SignIn extends Component{
   constructor(){
       super()
       this.state = {
+          uid:'',
           email:'',
           pass:'',
          }
@@ -24,12 +26,21 @@ class SignIn extends Component{
 
  handleSignIn(e){
      e.preventDefault();
-     console.log(this.state)
+     
      FirebaseService.LoginWithAuth(this.state)
      .then((user) => {
-         console.log(user)
+         this.setState({uid: user.uid})
+         console.log(this.state)
+         
          this.props.signIn(this.state)
-         browserHistory.push('/registration')
+         browserHistory.push('/home')
+
+        firebase.database().ref('Users/' + user.uid).on('value', (snapshot) =>{
+            const currentUser = snapshot.val()  
+            console.log(currentUser)
+            this.props.currentUser(currentUser)
+         })
+         
      }).catch(e => alert(e.message))
 
  }
@@ -87,7 +98,8 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
     return{
-        signIn: (data) => dispatch(signIn(data))
+        signIn: (data) => dispatch(signIn(data)),
+        currentUser: (data) => dispatch(currentUserInfo(data))
     }
 }
 

@@ -4,7 +4,8 @@ import {browserHistory} from 'react-router'
 import {connect} from 'react-redux'
 import * as firebase from 'firebase'
 import FirebaseService from './../../firebase/firebaseService'
-import {signIn , currentUserInfo} from './../../store/actions'
+import AuthMiddleware from './../../store/middleware/AuthMiddleware'
+import {signInWithAuth} from './../../store/actions'
 import './SignIn.css'
 
 
@@ -15,7 +16,6 @@ class SignIn extends Component{
   constructor(){
       super()
       this.state = {
-          uid:'',
           email:'',
           pass:'',
          }
@@ -26,22 +26,22 @@ class SignIn extends Component{
 
  handleSignIn(e){
      e.preventDefault();
-     
-     FirebaseService.LoginWithAuth(this.state)
-     .then((user) => {
-         this.setState({uid: user.uid})
-         console.log(this.state)
-         
-         this.props.signIn(this.state)
-         browserHistory.push('/home')
+     this.props.signin(this.state);
+    //  FirebaseService.LoginWithAuth(this.state)
+    //  .then((user) => {
+    //      this.setState({uid: user.uid})
+    //      console.log(this.state)
+    //      localStorage.setItem("currentUser" , user.uid)
+    //      this.props.signIn(this.state)
+    //      browserHistory.push('/home')
 
-        firebase.database().ref('Users/' + user.uid).on('value', (snapshot) =>{
-            const currentUser = snapshot.val()  
-            console.log(currentUser)
-            this.props.currentUser(currentUser)
-         })
+    //     firebase.database().ref('Users/' + user.uid).on('value', (snapshot) =>{
+    //         const currentUser = snapshot.val()  
+    //         console.log(currentUser)
+    //         this.props.currentUser(currentUser)
+    //      })
          
-     }).catch(e => alert(e.message))
+    //  }).catch(e => alert(e.message))
 
  }
  
@@ -92,14 +92,14 @@ class SignIn extends Component{
 
 function mapStateToProps(state){
     return {
-        authReducer : state
+        
     }
 }
 
 function mapDispatchToProps(dispatch){
     return{
-        signIn: (data) => dispatch(signIn(data)),
-        currentUser: (data) => dispatch(currentUserInfo(data))
+        signin: (data) => dispatch(signInWithAuth(data)),
+        
     }
 }
 

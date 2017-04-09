@@ -1,9 +1,8 @@
 import React ,{Component} from 'react'
 import * as MUI from 'material-ui'
 import {Link , browserHistory} from 'react-router'
-import AuthReducer from './../../store/reducers/authReducer'
-import FirebaseService from './../../firebase/firebaseService'
-import {LogOut} from './../../store/actions'
+// import FirebaseService from './../../firebase/firebaseService'
+import {logOutWithAuth} from './../../store/actions'
 import {connect} from 'react-redux'
 import './Buttons.css'
 
@@ -16,13 +15,14 @@ import './Buttons.css'
 
     handleLogOut(e){
         e.preventDefault();
-
-        FirebaseService.LogOut()
-         .then(() => {
-         console.log("LogOut success")
-         this.props.signOut()
-         browserHistory.push('/signin')
-     }).catch(e => alert(e.message))    
+         
+        this.props.logout(); 
+    //     FirebaseService.LogOut()
+    //      .then(() => {
+    //      console.log("LogOut success")
+    //      this.props.signOut()
+    //      browserHistory.push('/signin')
+    //  }).catch(e => alert(e.message))    
         
 
     }
@@ -36,41 +36,45 @@ import './Buttons.css'
                   <div >
                       
                      
-                       { (this.props.isLogged === false) 
+                       { (this.props.isAuthenticated === false) 
                        ?  
                        <div>
                             {/*<MUI.DropDownMenu   >
                                 <Link to='/registration'><MUI.MenuItem primaryText="Register" /></Link>
                                 <Link to='/viewStudentDetail'><MUI.MenuItem  primaryText="View My Details" /></Link>
                           </MUI.DropDownMenu>  when of line                 */}
-                            <Link to="/signin"  className='buttons'><MUI.RaisedButton type="submit" primary={true} >Sign In</MUI.RaisedButton></Link>
+                            <Link to="/login"  className='buttons'><MUI.RaisedButton type="submit" primary={true} >Sign In</MUI.RaisedButton></Link>
                             <Link to="/signup"  className='buttons'><MUI.RaisedButton type="submit" primary={true} >Sign Up</MUI.RaisedButton></Link> 
                       </div>
                       :
                      <div>
                         
-                         <MUI.DropDownMenu   >
+                         {/*<MUI.DropDownMenu   >
                               {(this.props.userType === "Student") ?
                                 <div>
                                     <Link to='/registration'><MUI.MenuItem primaryText="Register Resume" /></Link>
                                     <Link to='/viewStudentDetail'><MUI.MenuItem  primaryText="View My Resume" /></Link>
+                                    <Link to='/viewAllJobs'><MUI.MenuItem  primaryText="View Jobs" /></Link>
                                 </div>
                              :null}
                              {(this.props.userType === "Company") ?
                                 <div>                         
                                     <Link to='/jobPost'><MUI.MenuItem  primaryText="Post job" /></Link>
                                     <Link to='/viewJob'><MUI.MenuItem  primaryText="View Job" /></Link>
+                                    <Link to='/viewAllStudents'><MUI.MenuItem  primaryText="View Students" /></Link>
                                 </div>
                                :null }
-                        </MUI.DropDownMenu>
+                        </MUI.DropDownMenu>*/}
                         
                          <MUI.RaisedButton
-                        onClick={this.handleLogOut}
-                        className='buttons'
-                        type="submit"
-                        primary={true} >
-                        Log Out
-                        </MUI.RaisedButton>
+                            onClick={this.handleLogOut}
+                            className='buttons'
+                            primary={true} 
+                            
+                            >
+                            LogOut</MUI.RaisedButton>
+                        
+                        
                       </div>   
                        }
                    </div>
@@ -82,14 +86,13 @@ import './Buttons.css'
 
 function mapStateToProps(state){
     return {
-        isLogged: state.AuthReducer.isLogged,
-        userType: state.DataReducer.userInfo.userType
+        isAuthenticated : state.AuthReducer.isAuthenticated
     }
 }
 
 function mapDispatchToProps(dispatch){
     return{
-        signOut: () => dispatch(LogOut())
+        logout: () => dispatch(logOutWithAuth())
     }
 }
 

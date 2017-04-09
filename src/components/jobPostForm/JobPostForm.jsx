@@ -1,13 +1,11 @@
 import React ,{Component} from 'react'
 import * as MUI from 'material-ui'
-import {browserHistory} from 'react-router'
+// import {browserHistory} from 'react-router'
 import {connect} from 'react-redux'
-import {newJobPost} from './../../store/actions'
-import firebase from 'firebase'
-import FirebaseService from './../../firebase/firebaseService'
-import './postForm.css'
 
-class PostForm extends Component{
+import './jobPostForm.css'
+
+class JobPostForm extends Component{
     
     constructor(){
         super()
@@ -17,8 +15,8 @@ class PostForm extends Component{
     handlePost(e){
         e.preventDefault();
         const job = {
-            uid:this.props.user.uid,
-            companyName:this.props.user.companyName,
+            uid:this.props.userAuth.uid,
+            companyName:this.props.userAuth.companyName,
             title: this.refs.jobTitle.getValue(),
             skills: this.refs.skillsRequired.getValue(),
             experience: this.refs.expRequired.getValue(),
@@ -26,15 +24,14 @@ class PostForm extends Component{
             description: this.refs.jobDescription.getValue(),
         }
 
-        let uid  = this.props.user.uid;
-        
+       this.props.jobPost(job);        
           
-        FirebaseService.saveData('/jobs/' + uid , job)
-        .then(() => {
-            console.log(job);
-            this.props.jobPost(job);
+    //     FirebaseService.saveData('/jobs/' + uid , job)
+    //     .then(() => {
+    //         console.log(job);
+    //         this.props.jobPost(job);
 
-       }).catch(e => console.log(e.message))
+    //    }).catch(e => console.log(e.message))
         
     }
     
@@ -94,17 +91,18 @@ class PostForm extends Component{
 }
 
 
-function mapStateToProps(state){
-    return {
-        user: state.DataReducer.userInfo
+// function mapStateToProps(state){
+//     return {
+//         user: state.DataReducer.userInfo
        
-    }
-}
+//     }
+// }
 
-function mapDispatchToProps(dispatch){
-    return{
-        jobPost: (data) => dispatch(newJobPost(data))
-    }
-}
+// function mapDispatchToProps(dispatch){
+//     return{
+//         jobPost: (data) => dispatch(newJobPost(data))
+//     }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostForm)
+// export default connect(mapStateToProps, mapDispatchToProps)(PostForm)
+export default JobPostForm;

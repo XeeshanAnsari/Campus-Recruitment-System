@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux'
 import AuthReducer from './authReducer'
-import DataReducer from './dataReducer'
 import StudentReducer from './studentReducer'
 import CompanyReducer from './companyReducer'
 
@@ -8,7 +7,7 @@ import CompanyReducer from './companyReducer'
         AuthReducer,
         StudentReducer,
         CompanyReducer,
-        DataReducer
+        
        
     })
 

@@ -1,22 +1,39 @@
 
 
-const InitalState = {
-    isRegistered: false,
-    isLogged: false,
-    user:{}
+const INITIAL_STATE = {
+    isRegistered:true,
+    isAuthenticated: false,
+    userAuth:{},
+    error:"",
+    isError: false
     
 
 };
 
 
-function AuthReducer(state = InitalState , action){
+function AuthReducer(state = INITIAL_STATE , action){
     switch(action.type){
+        
         case "SIGN_UP":
-           return (state ,{ user:action.user ,isRegistered: true})
+           return Object.assign({},state ,{isRegistered: false})
+        case "SIGN_UP_WITH_SUCCESSFULL":
+            return Object.assign({}, state ,{userAuth:action.user , isRegistered: true })   
+        case"SIGN_UP_WITH_REJECTED":
+             return Object.assign({}, state, {error: action.error, isRegistered:false  , isError:true})    
+       
         case "SIGN_IN":
-           return (state ,{ user:action.user , isLogged: true}) 
+           return Object.assign({},state ,{ isAuthenticated: true}) 
+        case "SIGN_IN_WITH_SUCCESSFULL":
+            return Object.assign({},state ,{ isAuthenticated: true , userAuth: action.user})   
+        case"SIGN_IN_WITH_REJECTED":
+             return Object.assign({},state, { isAuthenticated:false ,error: action.error  , isError:true})     
+       
         case "LOG_OUT":
-           return (state , {  isLogged: false }) 
+           return Object.assign({},state , { isAuthenticated: true }) 
+        case "LOG_OUT_WITH_SUCCESSFULL":
+            return Object.assign({},state ,{ isAuthenticated: false})   
+        case"LOG_OUT_WITH_REJECTED":
+             return Object.assign({},state, { isAuthenticated: true ,error: action.error  , isError:true})    
 
           
        

@@ -1,16 +1,17 @@
 import React ,{Component} from 'react'
 import * as MUI from 'material-ui'
 import {connect} from 'react-redux'
-import {viewStudentDetails}  from './../../store/actions'
 import * as firebase from 'firebase'
-import  {browserHistory}  from 'react-router'
-import FirebaseService from './../../firebase/firebaseService'
+// import  {browserHistory}  from 'react-router'
+// import FirebaseService from './../../firebase/firebaseService'
 import './viewDetails.css'
 
 class ViewStudentDetails extends Component{
     
    
-  
+    componentMillMount(){
+        this.props.getSingleStudentDetails(this.props.params.id);
+    }
 
     // componentMillMount(){
     //     let uid = this.props.user.uid;
@@ -45,9 +46,9 @@ class ViewStudentDetails extends Component{
                         <MUI.Paper className="paper">
                           <h1>Details</h1>
                           <div className="detail">
-                              
-                              <div><b>Email :</b> { this.props.user.email}</div>
-                              <div><b>Gender :</b> { this.props.user.gender}</div>
+                              <div><b>Full Name :</b> { this.props.student.fullName}</div>
+                              <div><b>Email :</b> { this.props.student.email}</div>
+                              <div><b>Gender :</b> { this.props.student.gender}</div>
                               <div><b>Last Education : </b> {this.props.student.lastEdu} </div>
                               <div><b>Last Education Year : </b> {this.props.student.eduYear} </div>
                               <div><b>Last Education Grade : </b> {this.props.student.eduGrade}</div>
@@ -65,22 +66,23 @@ class ViewStudentDetails extends Component{
     }
 }
 
- function mapStateToProps(state){
-    return {
+//  function mapStateToProps(state){
+//     return {
         
-        user : state.DataReducer.userInfo,
-        student: state.StudentReducer.studentDetails
+//         user : state.DataReducer.userInfo,
+//         student: state.StudentReducer.studentDetails
             
-        }
-    }
+//         }
+//     }
 
-  function mapDispatchToProps(dispatch){
-    return{
-        viewDetails: (data) => dispatch(viewStudentDetails(data))
-        }
-    }
+//   function mapDispatchToProps(dispatch){
+//     return{
+//         viewDetails: (data) => dispatch(viewStudentDetails(data))
+//         }
+//     }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(ViewStudentDetails)
+// export default connect(mapStateToProps, mapDispatchToProps)(ViewStudentDetails)
+export default ViewStudentDetails
 
 

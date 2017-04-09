@@ -2,9 +2,9 @@ import React ,{Component} from 'react'
 import * as MUI from 'material-ui'
 import {browserHistory} from 'react-router'
 import {connect} from 'react-redux'
-import AuthReducer from './../../store/reducers/authReducer'
+// import AuthReducer from './../../store/reducers/authReducer'
 import {addStudentDetails} from './../../store/actions'
-import FirebaseService from './../../firebase/firebaseService'
+// import FirebaseService from './../../firebase/firebaseService'
 import './studentRegister.css'
 
 class StudentRegister extends Component{
@@ -17,9 +17,12 @@ class StudentRegister extends Component{
     handleRegister(e){
         // (this.porps.user.uerType === "Student") ? browserHistory.push('/home') : null
          e.preventDefault();
-        const studentDetails = {
-            email: this.props.user.email,
-            gender:this.props.user.gender,
+         console.log(this.props.userAuth)
+     const studentData = {
+            uid: this.props.userAuth.uid,
+            fullName: this.props.userAuth.firstName + this.props.userAuth.lastName,
+            email: this.props.userAuth.email,
+            gender:this.props.userAuth.gender,
             lastEdu: this.refs.lastEdu.getValue(),
             eduYear: this.refs.eduYear.getValue(),
             eduGrade: this.refs.eduGrade.getValue(),
@@ -28,16 +31,17 @@ class StudentRegister extends Component{
             description: this.refs.description.getValue()
 
         }
-        // this.props.StudentRegister(studentDetails) when of line
+
+         this.props.studentRegister(studentData) 
         // console.log(studentDetails)
-        let uid = this.props.user.uid
+        // let uid = this.props.user.uid
         
-        FirebaseService.saveData('studentsDetail/' + uid , studentDetails)
-        .then(() => {
-         console.log(studentDetails)
-         this.props.StudentRegister(studentDetails)
-         browserHistory.push('/home')
-        })
+        // FirebaseService.saveData('studentsDetail/' + uid , studentDetails)
+        // .then(() => {
+        //  console.log(studentDetails)
+        //  this.props.StudentRegister(studentDetails)
+        //  browserHistory.push('/home')
+        // })
        
         
     }
@@ -102,16 +106,17 @@ class StudentRegister extends Component{
 }
 
 
-function mapStateToProps(state){
-    return {
-        user : state.DataReducer.userInfo
-    }
-}
+// function mapStateToProps(state){
+//     return {
+//         user : state.DataReducer.userInfo
+//     }
+// }
 
-function mapDispatchToProps(dispatch){
-    return{
-        StudentRegister: (data) => dispatch(addStudentDetails(data))
-    }
-}
+// function mapDispatchToProps(dispatch){
+//     return{
+//         StudentRegister: (data) => dispatch(addStudentDetails(data))
+//     }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(StudentRegister)
+// export default connect(mapStateToProps, mapDispatchToProps)(StudentRegister)
+export default StudentRegister

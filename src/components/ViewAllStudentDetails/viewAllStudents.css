@@ -1,0 +1,14 @@
+.container{
+    width: 70%;
+    margin: 7% auto;
+}
+.paper{
+    padding: 5%;
+}
+.students{
+    margin: 2%;
+
+}
+.view-buttons{
+    float: right
+}

@@ -3,9 +3,9 @@ import * as MUI from 'material-ui'
 import {connect } from 'react-redux'
 import {browserHistory} from 'react-router'
 import {signUp} from './../../store/actions'
-import FirebaseService from './../../firebase/firebaseService'
+// import FirebaseService from './../../firebase/firebaseService'
 import './SignUp.css'
-
+import  {signUpWithAuth} from './../../store/actions'
 export class SignUp extends Component{
 
     constructor(props){
@@ -33,20 +33,22 @@ export class SignUp extends Component{
            companyName: this.state.companyName,
            gender:this.state.gender,
       }
+       console.log(newUser)
+      this.props.signup(newUser);
 
-      FirebaseService.SignUpWithAuth(newUser)
-      .then((user) => {
+    //   FirebaseService.SignUpWithAuth(newUser)
+    //   .then((user) => {
           
-          newUser.uid = user.uid
-          FirebaseService.saveData( `Users/${user.uid}`, newUser) 
-          this.props.signup(newUser)
+    //       newUser.uid = user.uid
+    //       FirebaseService.saveData( `Users/${user.uid}`, newUser) 
+    //       this.props.signup(newUser)
 
-          browserHistory.push('/signin') 
-      }).catch((error) => alert(error.message))
+    //       browserHistory.push('/signin') 
+    //   }).catch((error) => alert(error.message))
 
 
 
-      console.log(newUser)
+     
   }
   handleGender(e,key){
        let val = key + 1;
@@ -64,7 +66,7 @@ export class SignUp extends Component{
 
   // for userType 
   handleUserType(e,key){
-       let value =   key+1;
+       let value =  key+1;
        let userType;
        if(value === 1 ) userType="Company" 
        else userType="Student"
@@ -183,7 +185,7 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
     return{
-        signup: (data) => dispatch(signUp(data))
+        signup: (data) => dispatch(signUpWithAuth(data))
     }
 }
 

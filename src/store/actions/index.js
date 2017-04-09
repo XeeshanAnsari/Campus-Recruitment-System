@@ -1,17 +1,15 @@
 
 
-import {signIn ,signUp , LogOut } from './authAction'
-import {currentUserInfo} from './dataAction'
-import {addStudentDetails ,viewStudentDetails} from './studentAction'
+import {signUpWithAuth ,signInWithAuth ,logOutWithAuth } from './authAction'
+import {newStudentRegister , getAllStudents} from './studentAction'
 import {newJobPost ,viewJobPost} from './companyAction'
 
 export{
-    signIn,
-    signUp,
-    currentUserInfo,
-    LogOut,
-    addStudentDetails,
-    viewStudentDetails,
+    signUpWithAuth,
+    signInWithAuth,
+    logOutWithAuth,
+    getAllStudents,
+    newStudentRegister,
     newJobPost,
     viewJobPost
 

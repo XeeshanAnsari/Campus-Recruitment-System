@@ -9,8 +9,9 @@ import './viewDetails.css'
 class ViewStudentDetails extends Component{
     
    
-    componentMillMount(){
-        this.props.getSingleStudentDetails(this.props.params.id);
+    componentWillMount(){
+        console.log(this.props.params.id)
+     this.props.getSingleStudentDetails(this.props.params.id);
     }
 
     // componentMillMount(){
@@ -45,19 +46,40 @@ class ViewStudentDetails extends Component{
                     <div className="container">
                         <MUI.Paper className="paper">
                           <h1>Details</h1>
-                          <div className="detail">
-                              <div><b>Full Name :</b> { this.props.student.fullName}</div>
-                              <div><b>Email :</b> { this.props.student.email}</div>
-                              <div><b>Gender :</b> { this.props.student.gender}</div>
-                              <div><b>Last Education : </b> {this.props.student.lastEdu} </div>
-                              <div><b>Last Education Year : </b> {this.props.student.eduYear} </div>
-                              <div><b>Last Education Grade : </b> {this.props.student.eduGrade}</div>
-                              <div><b>Professional Experience : </b> {this.props.student.professionalExp}</div>
-                              <div><b>Skills :</b> {this.props.student.skills} </div>
-                              <div><b>Personal & Professional Descripation :</b> {this.props.student.description}</div>
-                              
-                             
-                          </div>
+                           {/*{this.props.students
+                              .filter((student=>student.uid!== this.props.params.id))
+                              .map((student)=>{
+                              return(
+                                  <div className="detail">
+                                        <div><b>Full Name :</b> {student.fullName}</div>
+                                        <div><b>Email :</b> { student.email}</div>
+                                        <div><b>Gender :</b> { student.gender}</div>
+                                        <div><b>Last Education : </b> {student.lastEdu} </div>
+                                        <div><b>Last Education Year : </b> {student.eduYear} </div>
+                                        <div><b>Last Education Grade : </b> {student.eduGrade}</div>
+                                        <div><b>Professional Experience : </b> {student.professionalExp}</div>
+                                        <div><b>Skills :</b> {student.skills} </div>
+                                        <div><b>Personal & Professional Descripation :</b> {student.description}</div>
+                                        
+                                        
+                                    </div>
+                              )
+
+                          })}*/}
+                          {this.props.singleStudent}
+                                 <div className="detail">
+                                        <div><b>Full Name :</b> {this.props.singleStudent.fullName}</div>
+                                        <div><b>Email :</b> {this.props.singleStudent.email}</div>
+                                        <div><b>Gender :</b> {this.props.singleStudent.gender}</div>
+                                        <div><b>Last Education : </b> {this.props.singleStudent.lastEdu} </div>
+                                        <div><b>Last Education Year : </b> {this.props.singleStudent.eduYear} </div>
+                                        <div><b>Last Education Grade : </b> {this.props.singleStudent.eduGrade}</div>
+                                        <div><b>Professional Experience : </b> {this.props.singleStudent.professionalExp}</div>
+                                        <div><b>Skills :</b> {this.props.singleStudent.skills} </div>
+                                        <div><b>Personal & Professional Descripation :</b> {this.props.singleStudent.description}</div>
+                                        
+                                        
+                                    </div>
                         </MUI.Paper>    
                      </div>   
                 </MUI.MuiThemeProvider>    

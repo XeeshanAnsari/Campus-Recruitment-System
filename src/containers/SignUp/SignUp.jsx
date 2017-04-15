@@ -35,20 +35,7 @@ export class SignUp extends Component{
       }
        console.log(newUser)
       this.props.signup(newUser);
-
-    //   FirebaseService.SignUpWithAuth(newUser)
-    //   .then((user) => {
-          
-    //       newUser.uid = user.uid
-    //       FirebaseService.saveData( `Users/${user.uid}`, newUser) 
-    //       this.props.signup(newUser)
-
-    //       browserHistory.push('/signin') 
-    //   }).catch((error) => alert(error.message))
-
-
-
-     
+    
   }
   handleGender(e,key){
        let val = key + 1;

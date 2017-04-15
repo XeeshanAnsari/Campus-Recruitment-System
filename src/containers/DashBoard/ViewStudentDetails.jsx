@@ -4,13 +4,14 @@ import {getSingleStudentDetails}  from './../../store/actions'
 
 function mapStateToProps(state){
     return {
-         student: state.StudentReducer.studentData
+        students: state.StudentReducer.studentsData,
+        singleStudent: state.StudentReducer.singleStudent
     }
 }
 
 function mapDispatchToProps(dispatch){
     return {
-       getSingleStudentDetails: () => dispatch(getSingleStudentDetails())
+       getSingleStudentDetails: (id) => dispatch(getSingleStudentDetails(id))
     }
 }
 

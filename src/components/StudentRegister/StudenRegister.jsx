@@ -106,17 +106,4 @@ class StudentRegister extends Component{
 }
 
 
-// function mapStateToProps(state){
-//     return {
-//         user : state.DataReducer.userInfo
-//     }
-// }
-
-// function mapDispatchToProps(dispatch){
-//     return{
-//         StudentRegister: (data) => dispatch(addStudentDetails(data))
-//     }
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(StudentRegister)
 export default StudentRegister

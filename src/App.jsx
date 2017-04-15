@@ -2,9 +2,9 @@ import React ,{Component}  from 'react'
 
 import {Router , Route , IndexRoute , browserHistory} from 'react-router'
 import {AppBar ,Buttons ,SignUp ,SignIn , Home } from './containers'
-import {StudentRegister,ViewAllStudents , DashBoard ,JobPostForm} from './containers'
+import {StudentRegister,ViewAllStudents , DashBoard ,JobPostForm ,ViewStudentDetails} from './containers'
 
-import {ViewStudentDetails  ,ViewJob , ViewAllJobs}    from './components'
+import {ViewJob , ViewAllJobs}    from './components'
 
 import injectTapEventPlugin from 'react-tap-event-plugin'; //react-tap-event-plugin provides onTouchTap() to all React Components.
 injectTapEventPlugin();

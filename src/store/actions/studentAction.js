@@ -43,14 +43,40 @@ function studentRegisterWithRejected(error){
 }
 // studnet register end
 
-export function getSingleStudentDetails(){
+export function getSingleStudentDetails(id){
     
     return (dispatch) =>{
-        dispatch()
-        firebase.database().ref('studentDetails')
+        dispatch(singleStudentDetails())
+        this.props.students.filter((student=>student.uid!== this.props.params.id))
+        .then((student) => {
+             dispatch(singleStudentDetailsWithSuccessFull(student))
+        })
+        .catch((error) => {
+            dispatch(singleStudentDetailsWithRejected(error))
+        })
+
+
+    }
+}
+function singleStudentDetails(){
+    return{
+        type:"SINGLE_STUDENT_DETAILS"
     }
 }
 
+
+function singleStudentDetailsWithSuccessFull(student){
+    return{
+        type:"SINGLE_STUDENT_DETAILS_WIL_SUCCESSFULL",
+        student: student
+    }
+}
+function singleStudentDetailsWithRejected(error){
+    return{
+        type:"SINGLE_STUDENT_DETAILS_WIL_REJECTED",
+        error: error
+    }
+}
 
 
 export function getAllStudents(){

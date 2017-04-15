@@ -1,7 +1,8 @@
 
 
 const InitalState = {
-     jobsData:{},
+     jobs:{},
+     singleJob:{},
      isError: false,
      error:""     
 

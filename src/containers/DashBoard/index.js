@@ -1,11 +1,10 @@
 
 import StudentRegister from './StudentRegister'
-// import ViewStudentDetails from './ViewStudentDetails/ViewDetails'
 import ViewAllStudents from './ViewAllStudents'
- import  JobPostForm from './JobPostForm'
- import  ViewStudentDetails from './ViewStudentDetails'
-// import ViewJob from './ViewJob/ViewJob'
- import ViewAllJobs from '/ViewAllJobs'
+import  JobPostForm from './JobPostForm'
+import  ViewStudentDetails from './ViewStudentDetails'
+import ViewJobDetails from './ViewJobDetails'
+import ViewAllJobs from './ViewAllJobs'
 
 
 
@@ -14,7 +13,7 @@ export {
      ViewStudentDetails,
      ViewAllStudents,
      JobPostForm,
-    //  ViewJob,
+     ViewJobDetails,
      ViewAllJobs
 
 }

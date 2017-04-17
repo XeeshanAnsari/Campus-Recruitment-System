@@ -13,7 +13,7 @@ export function newStudentRegister(data){
         
         .then(()=>{
             dispatch(studentRegisterWithSuccessFull(data))
-            browserHistory.push('/viewStudentDetails')
+            browserHistory.push('/viewStudentDetails/' +  data.uid)
             
         })
         .catch((error) =>{
@@ -44,16 +44,22 @@ function studentRegisterWithRejected(error){
 // studnet register end
 
 export function getSingleStudentDetails(id){
-    
+     console.log(id)
     return (dispatch) =>{
         dispatch(singleStudentDetails())
-        this.props.students.filter((student=>student.uid!== this.props.params.id))
-        .then((student) => {
-             dispatch(singleStudentDetailsWithSuccessFull(student))
-        })
-        .catch((error) => {
-            dispatch(singleStudentDetailsWithRejected(error))
-        })
+        
+         firebase.database().ref('studentDetails/' + id).on('value', (snapshot) =>{
+              
+              var student = snapshot.val();
+              console.log(student)
+             dispatch(getSingleStudentDetails(student))
+         })
+        // .then((student) => {
+        //      dispatch(singleStudentDetailsWithSuccessFull(student))
+        // })
+        // .catch((error) => {
+        //     dispatch(singleStudentDetailsWithRejected(error))
+        // })
 
 
     }

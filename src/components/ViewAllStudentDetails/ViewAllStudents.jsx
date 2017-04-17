@@ -13,17 +13,13 @@ class ViewAllStudents extends Component{
        super();
       
        this.handleStudentList = this.handleStudentList.bind(this)
+       this.handleViewStudent = this.handleViewStudent.bind(this)
       
    }
    
-   handleDeleteStudent(e){
-       e.preventDefault();
-       console.log('Delete')
-   }
    handleViewStudent(id){
-
-        this.context.router.push("/viewStudentDetails/" + id);
-       
+       console.log(id)
+       this.context.router.push('/viewStudentDetails/' + id)
        
    } 
    componentWillMount(){
@@ -33,44 +29,21 @@ class ViewAllStudents extends Component{
 
    handleStudentList(){
       
-       var studentList = this.props.students
-        .map((student , i ) => {
-        console.log("Student item ",student);
-       return (<div key={student.uid} className="students">
-                  
-                {/*{student.fullName}
-                  <div className='actionBtn'><MUI.RaisedButton 
-                        label ="View"
-                        
-                        secondary={true}
-                        className="view-btn"/>
-                     <MUI.RaisedButton 
-                        label ="Delete"
-                        onClick={this.handleDeleteStudent.bind(this)}
-                        default={true}
-                        className="view-btn"/></div>}*/}
-                   
-                    
-                 
-
+      var studentList  = this.props.studentsList
+      .map((student , i) =>{
+          let uid  = student.uid
+          return(
+              
+              <div key={student.uid}>
                   <MUI.ListItem                    
-                     onClick={() =>  this.handleViewStudent(student.uid)}
+                     onClick={() =>  this.handleViewStudent(uid)}
                      primaryText={student.fullName}
-                     secondaryText={"Gender: " + student.gender}
+                     secondaryText={student.gender}
                     
                   />
-                  {/*<b>{i}</b>
-                  <b>{student.fullName}</b>
-                  <span className="view-buttons">
-                    
-                 </span>
-                                
-                              
-                           
-                  <MUI.Divider />*/}
-             </div>
-             )
-       })
+              </div>   
+          )
+      })
 
        return studentList;
    } 
@@ -82,12 +55,12 @@ class ViewAllStudents extends Component{
                     <div className="container">
                         <MUI.Paper className="paper">
                                                  
-                            {/*<MUI.List>*/}
+                            <MUI.List>
                                 <MUI.Subheader  inset={false}>All Students</MUI.Subheader>
                                 {
-                                this.handleStudentList()
+                                 (this.props.studentsList !== '') ?  this.handleStudentList() : null
                                 }
-                            {/*</MUI.List>*/}
+                            </MUI.List>
                         </MUI.Paper>    
                      </div>   
                 </MUI.MuiThemeProvider>    

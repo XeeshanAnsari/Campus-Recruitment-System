@@ -1,8 +1,8 @@
 
 
 import {signUpWithAuth ,signInWithAuth ,logOutWithAuth } from './authAction'
-import {newStudentRegister , getAllStudents} from './studentAction'
-import {newJobPost ,viewJobPost} from './companyAction'
+import {newStudentRegister , getAllStudents ,getSingleStudentDetails} from './studentAction'
+import {newJobPost ,viewJobPost ,getAllJobs ,getSingleJobDetails} from './companyAction'
 
 export{
     signUpWithAuth,
@@ -10,8 +10,11 @@ export{
     logOutWithAuth,
     getAllStudents,
     newStudentRegister,
+    getSingleStudentDetails,
     newJobPost,
-    viewJobPost
+    viewJobPost,
+    getAllJobs,
+    getSingleJobDetails
 
 
 }

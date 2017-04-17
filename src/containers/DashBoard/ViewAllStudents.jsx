@@ -5,7 +5,7 @@ import {getAllStudents} from './../../store/actions'
 
 function mapStateToProps(state){
     return {
-         students: state.StudentReducer.studentsData
+         studentsList: state.StudentReducer.studentsData
     }
 }
 

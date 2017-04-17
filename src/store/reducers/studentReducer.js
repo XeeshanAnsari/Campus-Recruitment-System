@@ -1,7 +1,7 @@
 
 
 const InitalState = {
-     studentsData:{},
+     studentsData:'',
      singleStudent:{},
      isError:false,
      error:''
@@ -40,6 +40,7 @@ function StudentReducer(state = InitalState , action){
         default:
            return state
     }
+    console.log(action.data )
 }
 
 export default StudentReducer

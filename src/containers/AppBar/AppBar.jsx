@@ -1,8 +1,10 @@
 import React , {Component}  from 'react'
 import * as MUI from 'material-ui'
+import {connect} from 'react-redux'
 import Buttons from '../Buttons/Buttons'
 import { Link } from 'react-router'
-export default class AppBar extends Component{
+
+class AppBar extends Component{
     constructor(){
         super();
         this.state = {
@@ -19,9 +21,11 @@ export default class AppBar extends Component{
         return(
             <div>
                <div className="navigation-div">  
-                  <span ></span>
+                  <span >{this.props.userAuth.userType}</span>
                </div>
-                <div>
+                {
+                    (this.props.userAuth.userType  == 'Student'  ) ?
+                    <div>
                     <MUI.MenuItem
                     className="navigation-menuItem"
                     primaryText="Register Resume"
@@ -32,32 +36,37 @@ export default class AppBar extends Component{
                         primaryText="View My Resume"                    
                         containerElement={<Link to="/viewStudentDetails"/>}
                         />
-                    <MUI.Divider />
+                    
                     <MUI.MenuItem
                         className="navigation-menuItem"
                         primaryText="View Jobs"                    
                         containerElement={<Link to="/viewAlljobs"/>}
                         />
-                </div>
-                  <div>
-                    <MUI.MenuItem
-                    className="navigation-menuItem"
-                    primaryText="Post a JOb"
-                    containerElement={<Link to="/jobPost"/>}
-                    />
-                    <MUI.MenuItem
+                   
+                </div>: null
+                }
+                 {
+                    (this.props.userAuth.userType == 'Company'  ) ?
+                    <div>
+                        <MUI.MenuItem
                         className="navigation-menuItem"
-                        primaryText="View My Job"                    
-                        containerElement={<Link to="/viewjobDetail"/>}
+                        primaryText="Post a JOb"
+                        containerElement={<Link to="/jobPost"/>}
                         />
-                    <MUI.Divider />
-                    <MUI.MenuItem
-                        className="navigation-menuItem"
-                        primaryText="View Students"                    
-                        containerElement={<Link to="/viewAllStudents"/>}
-                        />
-                </div>
+                        <MUI.MenuItem
+                            className="navigation-menuItem"
+                            primaryText="View My Job"                    
+                            containerElement={<Link to="/viewjobDetail"/>}
+                            />
+                        <MUI.Divider />
+                        <MUI.MenuItem
+                            className="navigation-menuItem"
+                            primaryText="View Students"                    
+                            containerElement={<Link to="/viewAllStudents"/>}
+                            /> 
+                    </div>: null
 
+                 }
             </div>
         )
     }
@@ -84,3 +93,13 @@ export default class AppBar extends Component{
         )
     }
 }
+function mapStateToProps(state){
+    return {
+        isAuthenticated : state.AuthReducer.isAuthenticated,
+        userAuth: state.AuthReducer.userAuth
+    }
+}
+
+
+
+export default connect(mapStateToProps )(AppBar);

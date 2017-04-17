@@ -10,7 +10,7 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
     return {
-          studentRegister : (studentData) => dispatch(newStudentRegister(studentData))
+          studentRegister : (studentData ) => dispatch(newStudentRegister(studentData ))
     }
 }
 

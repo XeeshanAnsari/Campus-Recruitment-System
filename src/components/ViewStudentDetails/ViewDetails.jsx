@@ -11,7 +11,7 @@ class ViewStudentDetails extends Component{
    
     componentWillMount(){
         console.log(this.props.params.id)
-     this.props.getSingleStudentDetails(this.props.params.id);
+        this.props.getStudentDetails(this.props.params.id);
     }
 
     // componentMillMount(){
@@ -45,12 +45,12 @@ class ViewStudentDetails extends Component{
                 <MUI.MuiThemeProvider>
                     <div className="container">
                         <MUI.Paper className="paper">
-                          <h1>Details</h1>
+                          
                            {/*{this.props.students
                               .filter((student=>student.uid!== this.props.params.id))
-                              .map((student)=>{
+                              .map((student, i)=>{
                               return(
-                                  <div className="detail">
+                                  <div className="detail" key={i}>
                                         <div><b>Full Name :</b> {student.fullName}</div>
                                         <div><b>Email :</b> { student.email}</div>
                                         <div><b>Gender :</b> { student.gender}</div>
@@ -66,8 +66,9 @@ class ViewStudentDetails extends Component{
                               )
 
                           })}*/}
-                          {this.props.singleStudent}
+                          
                                  <div className="detail">
+                                      <h1>Details</h1>
                                         <div><b>Full Name :</b> {this.props.singleStudent.fullName}</div>
                                         <div><b>Email :</b> {this.props.singleStudent.email}</div>
                                         <div><b>Gender :</b> {this.props.singleStudent.gender}</div>

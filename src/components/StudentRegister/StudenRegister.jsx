@@ -31,7 +31,7 @@ class StudentRegister extends Component{
             description: this.refs.description.getValue()
 
         }
-
+         
          this.props.studentRegister(studentData) 
         // console.log(studentDetails)
         // let uid = this.props.user.uid

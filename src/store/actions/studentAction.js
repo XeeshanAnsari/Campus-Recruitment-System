@@ -43,16 +43,15 @@ function studentRegisterWithRejected(error){
 }
 // studnet register end
 
-export function getSingleStudentDetails(id){
-     console.log(id)
+ export function getSingleStudentDetails(id){
     return (dispatch) =>{
-        dispatch(singleStudentDetails())
         
-         firebase.database().ref('studentDetails/' + id).on('value', (snapshot) =>{
+        dispatch(singleStudentDetails())
+         firebase.database().ref('/studentDetails/').child(id).on('value', (snapshot) =>{
               
               var student = snapshot.val();
-              console.log(student)
-             dispatch(getSingleStudentDetails(student))
+              console.log("GET DATA" + student)
+             dispatch(singleStudentDetailsWithSuccessFull(student))
          })
         // .then((student) => {
         //      dispatch(singleStudentDetailsWithSuccessFull(student))
@@ -73,13 +72,13 @@ function singleStudentDetails(){
 
 function singleStudentDetailsWithSuccessFull(student){
     return{
-        type:"SINGLE_STUDENT_DETAILS_WIL_SUCCESSFULL",
+        type:"SINGLE_STUDENT_DETAILS_WILH_SUCCESSFULL",
         student: student
     }
 }
 function singleStudentDetailsWithRejected(error){
     return{
-        type:"SINGLE_STUDENT_DETAILS_WIL_REJECTED",
+        type:"SINGLE_STUDENT_DETAILS_WILH_REJECTED",
         error: error
     }
 }

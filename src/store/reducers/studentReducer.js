@@ -32,9 +32,9 @@ function StudentReducer(state = InitalState , action){
         
         case "SINGLE_STUDENT_DETAILS":
            return Object.assign({}, state ,{  isError: false  })
-        case "SINGLE_STUDENT_DETAILS_WILL_SUCCESSFULL":
-            return Object.assign({}, state , {singleStudent: action.student , isError: false })
-        case "SINGLE_STUDENT_DETAILS_WILL_REJECTED":
+        case "SINGLE_STUDENT_DETAILS_WILH_SUCCESSFULL":
+            return Object.assign({}, state , {singleStudent: action.student, isError: false })
+        case "SINGLE_STUDENT_DETAILS_WILH_REJECTED":
            return Object.assign({}, state , {error: action.error , isError:true})
 
         default:

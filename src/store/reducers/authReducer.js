@@ -22,7 +22,7 @@ function AuthReducer(state = INITIAL_STATE , action){
              return Object.assign({}, state, {error: action.error, isRegistered:false  , isError:true})    
        
         case "SIGN_IN":
-           return Object.assign({},state ,{ isAuthenticated: true}) 
+           return Object.assign({},state ,{ isAuthenticated: false}) 
         case "SIGN_IN_WITH_SUCCESSFULL":
             return Object.assign({},state ,{ isAuthenticated: true , userAuth: action.user})   
         case"SIGN_IN_WITH_REJECTED":

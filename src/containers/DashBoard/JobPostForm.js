@@ -4,7 +4,8 @@ import {newJobPost} from './../../store/actions'
 
 function mapStateToProps(state){
     return {
-          userAuth : state.AuthReducer.userAuth
+          userAuth : state.AuthReducer.userAuth,
+          isAuth : state.AuthReducer.isAuthenticated
     }
 }
 

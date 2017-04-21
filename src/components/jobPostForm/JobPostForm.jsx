@@ -1,16 +1,27 @@
-import React ,{Component} from 'react'
+import React ,{Component ,PropTypes} from 'react'
 import * as MUI from 'material-ui'
-// import {browserHistory} from 'react-router'
-import {connect} from 'react-redux'
-
 import './jobPostForm.css'
 
 class JobPostForm extends Component{
     
+
+   static contextTypes = {
+    router: PropTypes.object.isRequired
+  }
     constructor(){
         super()
         this.handlePost = this.handlePost.bind(this)
 
+    }
+//      componentWillReceiveProps(nextProps){
+//        if(this.props.isAuth !== true){
+//            this.context.router.push('/login')
+//        }
+//    }
+    componentWillMount(){
+        if(this.props.isAuth !== true){
+            this.context.router.push('/login')
+        }
     }
     handlePost(e){
         e.preventDefault();

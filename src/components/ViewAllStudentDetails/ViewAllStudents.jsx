@@ -17,14 +17,18 @@ class ViewAllStudents extends Component{
       
    }
    
+   
    handleViewStudent(id){
        console.log(id)
        this.context.router.push('/viewStudentDetails/' + id)
        
    } 
    componentWillMount(){
+       if(this.props.isAuth !== true){
+           this.context.router.push('/login')
+       }else{
        this.props.getAllStudents();
-     
+       }
    } 
 
    handleStudentList(){
@@ -53,7 +57,7 @@ class ViewAllStudents extends Component{
             <div>
                 <MUI.MuiThemeProvider>
                     <div className="container">
-                        <MUI.Paper className="paper">
+                        <MUI.Paper className="paper" zDepth={2} >
                                                  
                             <MUI.List>
                                 <MUI.Subheader  inset={false}>All Students</MUI.Subheader>

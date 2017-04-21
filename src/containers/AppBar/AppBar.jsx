@@ -1,18 +1,27 @@
-import React , {Component}  from 'react'
+import React , {Component ,PropTypes}  from 'react'
 import * as MUI from 'material-ui'
 import {connect} from 'react-redux'
 import Buttons from '../Buttons/Buttons'
 import { Link } from 'react-router'
+import './AppBar.css'
 
 class AppBar extends Component{
+    
+    static contextTypes ={
+        router: PropTypes.object.isRequired
+    }
+    
+  
+    
     constructor(){
         super();
         this.state = {
             drawerOpen : false
         }
         this.handleDrawerToggle = this.handleDrawerToggle.bind(this)
+       
     }
-
+    
     handleDrawerToggle(){
         this.setState({drawerOpen: !this.state.drawerOpen})
     }
@@ -20,22 +29,23 @@ class AppBar extends Component{
     drawerMenu(){
         return(
             <div>
-               <div className="navigation-div">  
-                  <span >{this.props.userAuth.userType}</span>
+               <div className="navigation-div"> 
+                   <MUI.Avatar />
+                   <span className='user-name' >{this.props.userAuth.firstName + ' '  +this.props.userAuth.lastName  }</span>
                </div>
                 {
-                    (this.props.userAuth.userType  == 'Student'  ) ?
+                    (this.props.userAuth.userType  == 'Student' || this.props.userAuth.userType  == 'Admin' ) ?
                     <div>
                     <MUI.MenuItem
                     className="navigation-menuItem"
-                    primaryText="Register Resume"
+                    primaryText="Register As Student"
                     containerElement={<Link to="/registration"/>}
                     />
-                    <MUI.MenuItem
+                    {/*<MUI.MenuItem
                         className="navigation-menuItem"
                         primaryText="View My Resume"                    
-                        containerElement={<Link to="/viewStudentDetails"/>}
-                        />
+                        onTouchTap={this.context.router.push("/viewStudentDetails/" + this.props.userAuth.uid)}
+                        />*/}
                     
                     <MUI.MenuItem
                         className="navigation-menuItem"
@@ -46,19 +56,19 @@ class AppBar extends Component{
                 </div>: null
                 }
                  {
-                    (this.props.userAuth.userType == 'Company'  ) ?
+                    (this.props.userAuth.userType == 'Company' || this.props.userAuth.userType  == 'Admin' ) ?
                     <div>
                         <MUI.MenuItem
                         className="navigation-menuItem"
                         primaryText="Post a JOb"
                         containerElement={<Link to="/jobPost"/>}
                         />
-                        <MUI.MenuItem
+                        {/*<MUI.MenuItem
                             className="navigation-menuItem"
                             primaryText="View My Job"                    
                             containerElement={<Link to="/viewjobDetail"/>}
-                            />
-                        <MUI.Divider />
+                            />*/}
+                       
                         <MUI.MenuItem
                             className="navigation-menuItem"
                             primaryText="View Students"                    
@@ -76,7 +86,7 @@ class AppBar extends Component{
                 <MUI.MuiThemeProvider>
                    <div>
                       <MUI.AppBar  
-                      title="Campus System" 
+                      title="campus Recruitment System" 
                       onLeftIconButtonTouchTap={this.handleDrawerToggle}
                       iconElementRight={<Buttons />}
                       /> 

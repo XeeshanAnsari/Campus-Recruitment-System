@@ -3,7 +3,7 @@ import * as MUI from 'material-ui'
 import {connect } from 'react-redux'
 import {browserHistory} from 'react-router'
 import {signUp} from './../../store/actions'
-// import FirebaseService from './../../firebase/firebaseService'
+
 import './SignUp.css'
 import  {signUpWithAuth} from './../../store/actions'
 export class SignUp extends Component{
@@ -37,18 +37,22 @@ export class SignUp extends Component{
       this.props.signup(newUser);
     
   }
-  handleGender(e,key){
-       let val = key + 1;
+  handleGender(e,key,value){
+       
        let gender;
-       if(val === 1)  gender="Male" 
-       else gender="Female"
+       if(this.state.key === 1){
+          gender="Male" 
+       }  
+       else{
+           gender="Female"
+        } 
        
        this.setState({
-           key : val,
-           gender : gender
+           key: value,
+           gender:gender
            
        })
-       console.log(val , gender)
+       console.log(value , this.state.gender)
   }
 
   // for userType 

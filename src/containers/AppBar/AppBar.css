@@ -1,0 +1,13 @@
+
+.navigation-div{
+    width: 100%;
+    background: dodgerblue;
+    padding: 5%;
+}
+.user-name{
+    position: relative;
+    top: -12px;
+    left: 5%;
+    color: white;
+    text-align: center;
+}

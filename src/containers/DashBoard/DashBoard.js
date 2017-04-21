@@ -1,4 +1,4 @@
-import React ,{Component} from 'react'
+/*import React ,{Component} from 'react'
 import  {connect} from 'react-redux'
 // import {StudentRegister} from './../../components'
 import {newStudentRegister} from './../../store/actions'
@@ -28,4 +28,4 @@ class DashBoard extends Component{
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(DashBoard)
+export default connect(mapStateToProps,mapDispatchToProps)(DashBoard)*/

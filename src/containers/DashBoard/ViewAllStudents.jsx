@@ -5,7 +5,8 @@ import {getAllStudents} from './../../store/actions'
 
 function mapStateToProps(state){
     return {
-         studentsList: state.StudentReducer.studentsData
+         studentsList: state.StudentReducer.studentsData,
+         isAuth : state.AuthReducer.isAuthenticated
     }
 }
 

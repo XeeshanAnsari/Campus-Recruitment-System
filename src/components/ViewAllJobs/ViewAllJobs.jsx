@@ -14,8 +14,13 @@ class ViewAllJobs extends Component{
        this.handlesingleJob =  this.handlesingleJob.bind(this)
    }
    
+   
    componentWillMount(){
+       if(this.props.isAuth !== true){
+           this.context.router.push('/login')
+       }else{
        this.props.getJobs();
+       }
    }
 
    handlesingleJob(id){

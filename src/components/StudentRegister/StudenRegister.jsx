@@ -1,19 +1,28 @@
-import React ,{Component} from 'react'
+import React ,{Component , PropTypes} from 'react'
 import * as MUI from 'material-ui'
-import {browserHistory} from 'react-router'
-import {connect} from 'react-redux'
-// import AuthReducer from './../../store/reducers/authReducer'
-import {addStudentDetails} from './../../store/actions'
-// import FirebaseService from './../../firebase/firebaseService'
 import './studentRegister.css'
 
 class StudentRegister extends Component{
     
+    static contextTypes = {
+    router: PropTypes.object.isRequired
+  }
     constructor(){
         super()
         this.handleRegister = this.handleRegister.bind(this)
 
     }
+    // componentWillReceiveProps(nextProps){
+    //    if(this.props.isAuth !== true){
+    //        this.context.router.push('/login')
+    //     }
+    //    }
+    componentWillMount(){
+    if(this.props.isAuth !== true){
+           this.context.router.push('/login')
+       }
+    }
+
     handleRegister(e){
         // (this.porps.user.uerType === "Student") ? browserHistory.push('/home') : null
          e.preventDefault();
@@ -33,15 +42,7 @@ class StudentRegister extends Component{
         }
          
          this.props.studentRegister(studentData) 
-        // console.log(studentDetails)
-        // let uid = this.props.user.uid
-        
-        // FirebaseService.saveData('studentsDetail/' + uid , studentDetails)
-        // .then(() => {
-        //  console.log(studentDetails)
-        //  this.props.StudentRegister(studentDetails)
-        //  browserHistory.push('/home')
-        // })
+     
        
         
     }
